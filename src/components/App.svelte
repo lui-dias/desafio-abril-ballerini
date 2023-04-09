@@ -72,6 +72,7 @@
 						</div>
 						<a
 							href={c.link}
+                            target="_blank"
 							class="border border-zinc-600 rounded px-2 py-1 text-zinc-400 bg-zinc-700 leading-4"
 							>Entrar</a
 						>
