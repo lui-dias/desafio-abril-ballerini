@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { themeStore } from '../stores/themeStore'
 	import type { Community, DiscordSearch } from '../types'
 	import { debounce, formatQuantity, getLangFromUrl, useTranslations } from '../utils'
 	import Header from './Header.svelte'
@@ -6,7 +7,7 @@
 	import Search from './icons/Search.svelte'
 
 	export let url: URL
-	let theme = localStorage.getItem('theme') || 'dark'
+	themeStore.set(localStorage.getItem('theme') || 'dark')
 	let value = ''
 	let input: HTMLInputElement
 	let communities = [] as Community[]
@@ -17,9 +18,9 @@
 	const t = useTranslations(lang)
 
 	$: {
-		localStorage.setItem('theme', theme)
+		localStorage.setItem('theme', $themeStore)
 
-		if (theme === 'dark') {
+		if ($themeStore === 'dark') {
 			document.documentElement.classList.add('dark')
 			document.documentElement.classList.remove('light')
 		} else {
@@ -67,7 +68,7 @@
 />
 
 <div class="max-w-7xl mx-auto relative">
-	<Header {lang} {theme} {t} />
+	<Header {lang} {t} />
 
 	<main
 		class="min-h-screen flex flex-col items-center justify-center gap-y-10 w-[95%] mx-auto md:w-full"

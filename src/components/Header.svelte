@@ -1,11 +1,11 @@
 <script lang="ts">
+	import { themeStore } from '../stores/themeStore'
 	import type { useTranslations } from '../utils'
 	import Dark from './icons/Dark.svelte'
 	import Light from './icons/Light.svelte'
 
 	export let t: ReturnType<typeof useTranslations>
 	export let lang: string
-	export let theme: string
 </script>
 
 <header class="pt-6 flex gap-x-6 justify-center absolute right-0 w-full">
@@ -29,7 +29,7 @@
 	</div>
 	<div class="relative">
 		<button type="button" class="group font-medium w-fit relative">
-			{#if theme === 'dark'}
+			{#if $themeStore === 'dark'}
 				<Dark />
 			{:else}
 				<Light />
@@ -39,13 +39,21 @@
 				class="bg-zinc-300 dark:bg-zinc-800 p-3 rounded-lg flex-col gap-y-2 hidden group-focus-within:flex absolute transform -translate-x-1/2 left-1/2 top-[calc(100%+8px)]"
 			>
 				<li>
-					<button type="button" class="flex gap-x-2" on:click={() => (theme = 'light')}>
+					<button
+						type="button"
+						class="flex gap-x-2"
+						on:click={() => themeStore.set('light')}
+					>
 						<Light />
 						<span class="text-zinc-700 dark:text-zinc-300">Light</span>
 					</button>
 				</li>
 				<li>
-					<button type="button" class="flex gap-x-2" on:click={() => (theme = 'dark')}>
+					<button
+						type="button"
+						class="flex gap-x-2"
+						on:click={() => themeStore.set('dark')}
+					>
 						<Dark />
 						<span class="text-zinc-700 dark:text-zinc-300">Dark</span>
 					</button>
