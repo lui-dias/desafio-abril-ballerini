@@ -48,12 +48,12 @@
 	}}
 />
 
-<main class="min-h-screen flex flex-col items-center justify-center gap-y-10">
+<main class="min-h-screen flex flex-col items-center justify-center gap-y-10 w-[95%] mx-auto md:w-full">
 	<img src="/writting-emoji.webp" alt="Writting emoji" />
 
 	<div class="flex flex-col items-center gap-y-2">
 		<h1 class="text-zinc-100 font-semibold text-3xl">Faça algo mágico...</h1>
-		<span class="text-zinc-400 text-2xl">Ache sempre tudo em um só lugar!</span>
+		<span class="text-zinc-400 text-2xl text-center">Ache sempre tudo em um só lugar!</span>
 	</div>
 
 	<form
