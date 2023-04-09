@@ -1,3 +1,10 @@
+export type Community = {
+	icon: string
+	name: string
+	members: number
+	link: string
+}
+
 export type DiscordSearch = {
 	hits: Hit[]
 	nbHits: number

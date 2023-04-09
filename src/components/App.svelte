@@ -1,26 +1,7 @@
 <script lang="ts">
-	import type { DiscordSearch } from '../types'
+	import type { Community, DiscordSearch } from '../types'
+	import { debounce, formatQuantity } from '../utils'
 	import Search from './icons/Search.svelte'
-
-	type Community = {
-		icon: string
-		name: string
-		members: number
-		link: string
-	}
-
-	function formatQuantity(number: number) {
-		return Intl.NumberFormat('en', { notation: 'compact' }).format(number)
-	}
-
-	function debounce(fn: () => void, delay: number) {
-		let timeout: NodeJS.Timeout
-
-		return function () {
-			clearTimeout(timeout)
-			timeout = setTimeout(() => fn(), delay)
-		}
-	}
 
 	let value = ''
 	let communities = [] as Community[]
