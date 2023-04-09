@@ -94,6 +94,7 @@
 				{:else}
 					<Light />
 				{/if}
+                <span class="sr-only">{t('theme')}</span>
 				<ul
 					class="bg-zinc-300 dark:bg-zinc-800 p-3 rounded-lg flex-col gap-y-2 hidden group-focus-within:flex absolute transform -translate-x-1/2 left-1/2 top-[calc(100%+8px)]"
 				>
@@ -125,7 +126,7 @@
 	<main
 		class="min-h-screen flex flex-col items-center justify-center gap-y-10 w-[95%] mx-auto md:w-full"
 	>
-		<img src="/writting-emoji.webp" alt="Writting emoji" />
+		<img src="/writting-emoji.webp" alt="Writting emoji" class="w-16 h-16"/>
 
 		<div class="flex flex-col items-center gap-y-2">
 			<h1 class="text-zinc-800 dark:text-zinc-100 font-semibold text-3xl">{t('title')}</h1>

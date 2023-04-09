@@ -12,7 +12,8 @@ export const ui = {
 		search: 'Do something magical...',
 		members: 'Members',
 		join: 'Join',
-        notFound: 'No community found'
+        notFound: 'No community found',
+        theme: 'Theme',
 	},
 	pt: {
         title: 'Faça algo mágico...',
@@ -21,5 +22,6 @@ export const ui = {
 		members: 'Membros',
 		join: 'Entrar',
         notFound: 'Nenhuma comunidade encontrada',
+        theme: 'Tema',
 	},
 } as const
