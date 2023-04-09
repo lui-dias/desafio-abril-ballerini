@@ -81,7 +81,7 @@
 							href={c.link}
 							target="_blank"
 							tabindex="-1"
-							class="border border-zinc-600 rounded px-2 py-1 text-zinc-400 bg-zinc-700 leading-4"
+							class="border border-zinc-600 rounded px-2 py-1 text-zinc-400 bg-zinc-700 leading-4 transition-colors hover:bg-orange-500 hover:text-zinc-100"
 							>Entrar</a
 						>
 					</li>
