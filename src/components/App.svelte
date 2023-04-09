@@ -41,6 +41,10 @@
 
 			input.focus()
 		}
+
+		if (e.key === 'Escape') {
+			input.blur()
+		}
 	}}
 />
 
@@ -52,7 +56,13 @@
 		<span class="text-zinc-400 text-2xl">Ache sempre tudo em um só lugar!</span>
 	</div>
 
-	<form class="rounded-lg bg-zinc-800 max-w-[560px] w-full">
+	<form
+		class="rounded-lg bg-zinc-800 max-w-[560px] w-full"
+		on:submit={e => {
+			e.preventDefault()
+			input.blur()
+		}}
+	>
 		<label
 			for="search"
 			class="relative px-6 bg-zinc-800 flex gap-x-3 items-center h-[55px] rounded-lg"
@@ -69,6 +79,8 @@
 					isLoading = true
 					debouncedGetCommunities()
 				}}
+				spellcheck="false"
+				autocomplete="off"
 			/>
 		</label>
 		{#if value}
