@@ -55,7 +55,7 @@
 				type="text"
 				id="search"
 				placeholder="Faça algo mágico.."
-				class="text-zinc-600 placeholder:text-zinc-600 font-medium bg-transparent w-full h-full outline-none"
+				class="text-zinc-400 placeholder:text-zinc-600 font-medium bg-transparent w-full h-full outline-none"
 				bind:value
 				on:input={debounce(getCommunities, 300)}
 			/>
