@@ -92,6 +92,10 @@
 					<Skeleton />
 					<Skeleton />
 					<Skeleton />
+				{:else if communities.length === 0}
+					<li class="flex justify-center items-center py-2">
+						<span class="text-zinc-400">Nenhum resultado encontrado</span>
+					</li>
 				{:else}
 					{#each communities as c}
 						<!-- svelte-ignore a11y-no-noninteractive-tabindex -->
