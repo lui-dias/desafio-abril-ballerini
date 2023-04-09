@@ -4,6 +4,7 @@
 	import Search from './icons/Search.svelte'
 
 	let value = ''
+	let input: HTMLInputElement
 	let communities = [] as Community[]
 
 	async function getCommunities() {
@@ -13,13 +14,25 @@
 		const data = (await response.json()) as DiscordSearch
 
 		communities = data.hits.map(c => ({
-			icon: `https://cdn.discordapp.com/icons/${c.id}/${c.icon}.png`,
+			icon: `https://cdn.discordapp.com/icons/${c.id}/${c.icon}.${
+				c.icon.startsWith('a_') ? 'gif' : 'png'
+			}`,
 			name: c.name,
 			members: c.approximate_member_count,
 			link: `https://discord.gg/${c.vanity_url_code}`,
 		}))
 	}
 </script>
+
+<svelte:window
+	on:keydown={e => {
+		if ((e.ctrlKey || e.metaKey) && e.key === 'k') {
+			e.preventDefault()
+
+			input.focus()
+		}
+	}}
+/>
 
 <main class="min-h-screen flex flex-col items-center justify-center gap-y-10">
 	<img src="/writting-emoji.webp" alt="Writting emoji" />
@@ -29,21 +42,22 @@
 		<span class="text-zinc-400 text-2xl">Ache sempre tudo em um só lugar!</span>
 	</div>
 
-	<form class="px-6 rounded-lg bg-zinc-800 max-w-[560px] w-full">
-		<label for="search" class="bg-zinc-800 flex gap-x-3 items-center h-[55px]">
+	<form class="rounded-lg bg-zinc-800 max-w-[560px] w-full">
+		<label for="search" class="relative px-6 bg-zinc-800 flex gap-x-3 items-center h-[55px] rounded-lg">
 			<Search />
 			<input
 				type="text"
 				id="search"
 				placeholder="Faça algo mágico.."
-				class="text-zinc-400 placeholder:text-zinc-600 font-medium bg-transparent w-full h-full outline-none"
+				class="absolute left-0 pl-12 pr-4 text-zinc-400 placeholder:text-zinc-600 font-medium bg-transparent w-full h-full"
 				bind:value
+				bind:this={input}
 				on:input={debounce(getCommunities, 300)}
 			/>
 		</label>
 		{#if communities.length}
 			<ul
-				class="flex flex-col gap-y-4 py-4 border-t border-zinc-700 max-h-[calc(48px*4+16px*3+32px)] overflow-y-auto scrollbar-thin scrollbar-thumb-zinc-600 scrollbar-track-zinc-700 pr-4"
+				class="px-6 flex flex-col gap-y-4 py-4 border-t border-zinc-700 max-h-[calc(48px*4+16px*3+32px)] overflow-y-auto scrollbar-thin scrollbar-thumb-zinc-600 scrollbar-track-zinc-700 pr-4"
 			>
 				{#each communities as c}
 					<li class="flex justify-between items-center">
