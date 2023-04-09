@@ -111,7 +111,7 @@
 			</label>
 			{#if value}
 				<ul
-					class="flex flex-col py-4 max-h-[calc(48px*4+16px*3+32px)] overflow-y-auto scrollbar-thin dark:scrollbar-thumb-zinc-600 dark:scrollbar-track-zinc-700 scrollbar-thumb-zinc-400 scrollbar-track-zinc-300 relative before:absolute before:top-0 before:left-0 before:w-[calc(100%-32px)] before:h-px before:bg-zinc-400 dark:before:bg-zinc-700 before:mx-4"
+					class="flex flex-col mt-1 py-4 max-h-[calc(48px*4+16px*3+32px)] overflow-y-auto scrollbar-thin dark:scrollbar-thumb-zinc-600 dark:scrollbar-track-zinc-700 scrollbar-thumb-zinc-400 scrollbar-track-zinc-300 relative before:absolute before:top-0 before:left-0 before:w-[calc(100%-32px)] before:h-px before:bg-zinc-400 dark:before:bg-zinc-700 before:mx-4"
 				>
 					{#if isLoading}
 						<Skeleton />
