@@ -1,4 +1,4 @@
-![](https://files.catbox.moe/l4hrsg.mp4)
+![](https://files.catbox.moe/hoh3ig.gif)
 
 ## O que é isso?
 Um lugar para você buscar servidores do discord
