@@ -48,7 +48,9 @@
 	}}
 />
 
-<main class="min-h-screen flex flex-col items-center justify-center gap-y-10 w-[95%] mx-auto md:w-full">
+<main
+	class="min-h-screen flex flex-col items-center justify-center gap-y-10 w-[95%] mx-auto md:w-full"
+>
 	<img src="/writting-emoji.webp" alt="Writting emoji" />
 
 	<div class="flex flex-col items-center gap-y-2">
