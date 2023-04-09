@@ -7,6 +7,6 @@ export function debounce(fn: () => void, delay: number) {
 
 	return () => {
 		clearTimeout(timeout)
-		timeout = setTimeout(() => fn(), delay)
+		timeout = setTimeout(fn, delay)
 	}
 }

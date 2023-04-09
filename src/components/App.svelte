@@ -1,13 +1,21 @@
 <script lang="ts">
 	import type { Community, DiscordSearch } from '../types'
 	import { debounce, formatQuantity } from '../utils'
+	import Skeleton from './Skeleton.svelte'
 	import Search from './icons/Search.svelte'
 
 	let value = ''
 	let input: HTMLInputElement
 	let communities = [] as Community[]
+	let isLoading = false
+	let debouncedGetCommunities = debounce(getCommunities, 500)
 
 	async function getCommunities() {
+		if (!value) {
+			communities = []
+			return
+		}
+
 		const response = await fetch(
 			`https://discord.com/api//discovery/search?query=${value}&limit=12`,
 		)
@@ -21,6 +29,8 @@
 			members: c.approximate_member_count,
 			link: `https://discord.gg/${c.vanity_url_code}`,
 		}))
+
+		isLoading = false
 	}
 </script>
 
@@ -55,37 +65,49 @@
 				class="absolute left-0 pl-12 pr-4 text-zinc-400 placeholder:text-zinc-600 font-medium bg-transparent w-full h-full rounded-lg outline-none focus:outline-zinc-400"
 				bind:value
 				bind:this={input}
-				on:input={debounce(getCommunities, 300)}
+				on:input={() => {
+					isLoading = true
+					debouncedGetCommunities()
+				}}
 			/>
 		</label>
-		{#if communities.length}
+		{#if value}
 			<ul
 				class="flex flex-col py-4 max-h-[calc(48px*4+16px*3+32px)] overflow-y-auto scrollbar-thin scrollbar-thumb-zinc-600 scrollbar-track-zinc-700 relative before:absolute before:top-0 before:left-0 before:w-[calc(100%-32px)] before:h-px before:bg-zinc-700 before:mx-4"
 			>
-				{#each communities as c}
-					<!-- svelte-ignore a11y-no-noninteractive-tabindex -->
-					<li
-						tabindex="0"
-						class="flex justify-between items-center py-2 px-6 focus:bg-zinc-700 outline-none"
-					>
-						<div tabindex="-1" class="flex items-center">
-							<img src={c.icon} alt={c.name} class="w-10 h-10 rounded-lg" />
-							<div class="flex flex-col ml-4">
-								<strong class="font-medium text-zinc-200 text-xl">{c.name}</strong>
-								<span class="text-sm text-zinc-400"
-									>{formatQuantity(c.members)} membros</span
-								>
-							</div>
-						</div>
-						<a
-							href={c.link}
-							target="_blank"
-							tabindex="-1"
-							class="border border-zinc-600 rounded px-2 py-1 text-zinc-400 bg-zinc-700 leading-4 transition-colors hover:bg-orange-500 hover:text-zinc-100"
-							>Entrar</a
+				{#if isLoading}
+					<Skeleton />
+					<Skeleton />
+					<Skeleton />
+					<Skeleton />
+				{:else}
+					{#each communities as c}
+						<!-- svelte-ignore a11y-no-noninteractive-tabindex -->
+						<li
+							tabindex="0"
+							class="flex justify-between items-center py-2 px-6 focus:bg-zinc-700 outline-none"
 						>
-					</li>
-				{/each}
+							<div tabindex="-1" class="flex items-center">
+								<img src={c.icon} alt={c.name} class="w-10 h-10 rounded-lg" />
+								<div class="flex flex-col ml-4">
+									<strong class="font-medium text-zinc-200 text-xl"
+										>{c.name}</strong
+									>
+									<span class="text-sm text-zinc-400"
+										>{formatQuantity(c.members)} membros</span
+									>
+								</div>
+							</div>
+							<a
+								href={c.link}
+								target="_blank"
+								tabindex="-1"
+								class="border border-zinc-600 rounded px-2 py-1 text-zinc-400 bg-zinc-700 leading-4 transition-colors hover:bg-orange-500 hover:text-zinc-100"
+								>Entrar</a
+							>
+						</li>
+					{/each}
+				{/if}
 			</ul>
 		{/if}
 	</form>
