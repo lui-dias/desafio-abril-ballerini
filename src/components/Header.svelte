@@ -8,7 +8,7 @@
 	export let theme: string
 </script>
 
-<header class="pt-6 flex gap-x-6 justify-end absolute right-0">
+<header class="pt-6 flex gap-x-6 justify-center absolute right-0 w-full">
 	<div class="relative -translate-y-0.5">
 		<button
 			type="button"
