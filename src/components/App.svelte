@@ -1,14 +1,18 @@
 <script lang="ts">
 	import type { Community, DiscordSearch } from '../types'
-	import { debounce, formatQuantity } from '../utils'
+	import { debounce, formatQuantity, getLangFromUrl, useTranslations } from '../utils'
 	import Skeleton from './Skeleton.svelte'
 	import Search from './icons/Search.svelte'
 
+	export let url: URL
 	let value = ''
 	let input: HTMLInputElement
 	let communities = [] as Community[]
 	let isLoading = false
 	let debouncedGetCommunities = debounce(getCommunities, 500)
+
+	const lang = getLangFromUrl(url)
+	const t = useTranslations(lang)
 
 	async function getCommunities() {
 		if (!value) {
@@ -54,8 +58,8 @@
 	<img src="/writting-emoji.webp" alt="Writting emoji" />
 
 	<div class="flex flex-col items-center gap-y-2">
-		<h1 class="text-zinc-100 font-semibold text-3xl">Faça algo mágico...</h1>
-		<span class="text-zinc-400 text-2xl text-center">Ache sempre tudo em um só lugar!</span>
+		<h1 class="text-zinc-100 font-semibold text-3xl">{t('title')}</h1>
+		<span class="text-zinc-400 text-2xl text-center">{t('subtitle')}</span>
 	</div>
 
 	<form
@@ -73,7 +77,7 @@
 			<input
 				type="text"
 				id="search"
-				placeholder="Faça algo mágico.."
+				placeholder={t('search')}
 				class="absolute left-0 pl-12 pr-4 text-zinc-400 placeholder:text-zinc-600 font-medium bg-transparent w-full h-full rounded-lg outline-none focus:outline-zinc-400"
 				bind:value
 				bind:this={input}
@@ -96,7 +100,7 @@
 					<Skeleton />
 				{:else if communities.length === 0}
 					<li class="flex justify-center items-center py-2">
-						<span class="text-zinc-400">Nenhum resultado encontrado</span>
+						<span class="text-zinc-400">{t('notFound')}</span>
 					</li>
 				{:else}
 					{#each communities as c}
@@ -112,7 +116,7 @@
 										>{c.name}</strong
 									>
 									<span class="text-sm text-zinc-400"
-										>{formatQuantity(c.members)} membros</span
+										>{formatQuantity(c.members)} {t('members')}</span
 									>
 								</div>
 							</div>
@@ -121,7 +125,7 @@
 								target="_blank"
 								tabindex="-1"
 								class="border border-zinc-600 rounded px-2 py-1 text-zinc-400 bg-zinc-700 leading-4 transition-colors hover:bg-orange-500 hover:text-zinc-100"
-								>Entrar</a
+								>{t('join')}</a
 							>
 						</li>
 					{/each}
