@@ -43,7 +43,10 @@
 	</div>
 
 	<form class="rounded-lg bg-zinc-800 max-w-[560px] w-full">
-		<label for="search" class="relative px-6 bg-zinc-800 flex gap-x-3 items-center h-[55px] rounded-lg">
+		<label
+			for="search"
+			class="relative px-6 bg-zinc-800 flex gap-x-3 items-center h-[55px] rounded-lg"
+		>
 			<Search />
 			<input
 				type="text"
@@ -57,11 +60,15 @@
 		</label>
 		{#if communities.length}
 			<ul
-				class="px-6 flex flex-col gap-y-4 py-4 border-t border-zinc-700 max-h-[calc(48px*4+16px*3+32px)] overflow-y-auto scrollbar-thin scrollbar-thumb-zinc-600 scrollbar-track-zinc-700 pr-4"
+				class="flex flex-col py-4 max-h-[calc(48px*4+16px*3+32px)] overflow-y-auto scrollbar-thin scrollbar-thumb-zinc-600 scrollbar-track-zinc-700 relative before:absolute before:top-0 before:left-0 before:w-[calc(100%-32px)] before:h-px before:bg-zinc-700 before:mx-4"
 			>
 				{#each communities as c}
-					<li class="flex justify-between items-center">
-						<div class="flex">
+					<!-- svelte-ignore a11y-no-noninteractive-tabindex -->
+					<li
+						tabindex="0"
+						class="flex justify-between items-center py-2 px-6 focus:bg-zinc-700 outline-none"
+					>
+						<div tabindex="-1" class="flex items-center">
 							<img src={c.icon} alt={c.name} class="w-10 h-10 rounded-lg" />
 							<div class="flex flex-col ml-4">
 								<strong class="font-medium text-zinc-200 text-xl">{c.name}</strong>
@@ -72,7 +79,8 @@
 						</div>
 						<a
 							href={c.link}
-                            target="_blank"
+							target="_blank"
+							tabindex="-1"
 							class="border border-zinc-600 rounded px-2 py-1 text-zinc-400 bg-zinc-700 leading-4"
 							>Entrar</a
 						>
