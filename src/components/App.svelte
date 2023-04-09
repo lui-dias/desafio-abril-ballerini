@@ -49,7 +49,7 @@
 				type="text"
 				id="search"
 				placeholder="Faça algo mágico.."
-				class="absolute left-0 pl-12 pr-4 text-zinc-400 placeholder:text-zinc-600 font-medium bg-transparent w-full h-full"
+				class="absolute left-0 pl-12 pr-4 text-zinc-400 placeholder:text-zinc-600 font-medium bg-transparent w-full h-full rounded-lg outline-none focus:outline-zinc-400"
 				bind:value
 				bind:this={input}
 				on:input={debounce(getCommunities, 300)}
